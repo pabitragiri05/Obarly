@@ -1,1 +1,1 @@
-web: python -m pip install -r requirements.txt && python -m gunicorn wsgi:app --bind 0.0.0.0:$PORT 
+web: /app/.heroku/python/bin/python -m pip install -r requirements.txt && /app/.heroku/python/bin/python -m gunicorn wsgi:app --bind 0.0.0.0:$PORT 
