@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Obarly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a5f3f',
+                        secondary: '#d4af37',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gray: '#6c757d',
+                        lightGray: '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .active-nav {
+            background-color: rgba(42, 95, 63, 0.1);
+            border-left: 4px solid #2a5f3f;
+            color: #2a5f3f;
+        }
+        .chart-container {
+            height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-white w-64 shadow-lg flex-shrink-0">
+            <div class="p-4 border-b border-gray-200">
+                <img src="logo/obar_bg.png" alt="Obarly Logo" class="h-10">
+            </div>
+            <div class="p-4">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="font-semibold">{{ session.user_name }}</h4>
+                        <p class="text-xs text-gray-500">Super Admin</p>
+                    </div>
+                </div>
+                
+                <nav class="mt-8">
+                    <h5 class="text-xs uppercase text-gray-500 font-semibold mb-4">Main</h5>
+                    <a href="{{ url_for('admin') }}" class="flex items-center py-3 px-4 rounded-lg active-nav mb-2">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{{ url_for('product') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-shopping-bag mr-3"></i>
+                        <span>Products</span>
+                    </a>
+                    <a href="{{ url_for('admin_orders') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-truck mr-3"></i>
+                        <span>Orders</span>
+                        <span class="ml-auto bg-primary text-white text-xs px-2 py-1 rounded-full">{{ orders|length }}</span>
+                    </a>
+                    <a href="{{ url_for('admin_users') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Users</span>
+                    </a>
+                    
+                    <h5 class="text-xs uppercase text-gray-500 font-semibold mt-8 mb-4">Management</h5>
+                    <a href="{{ url_for('product') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-tags mr-3"></i>
+                        <span>Categories</span>
+                    </a>
+                    <a href="{{ url_for('product') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-box-open mr-3"></i>
+                        <span>Inventory</span>
+                    </a>
+                    
+                    <h5 class="text-xs uppercase text-gray-500 font-semibold mt-8 mb-4">Settings</h5>
+                    <a href="{{ url_for('index') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>Back to Home</span>
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        <span>Logout</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="mr-4 text-gray-500">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <img src="{{ url_for('static', filename='logo/obar_bg.png') }}" alt="Obarly Logo" class="h-10 mr-4">
+                        <h1 class="font-serif text-xl text-primary">Dashboard</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <button class="text-gray-500">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </div>
+                        <div class="relative">
+                            <button class="text-gray-500">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Products</p>
+                                <h3 class="text-2xl font-bold">{{ products|length }}</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Users</p>
+                                <h3 class="text-2xl font-bold">{{ users|length }}</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center text-secondary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Orders</p>
+                                <h3 class="text-2xl font-bold">{{ orders|length }}</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-10 flex items-center justify-center text-blue-500">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="font-serif text-lg text-primary">Recent Orders</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                {% for order in orders[:5] %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">#{{ order._id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full {% if order.status == 'Delivered' %}bg-green-100 text-green-800{% elif order.status == 'Shipped' %}bg-blue-100 text-blue-800{% elif order.status == 'Processing' %}bg-yellow-100 text-yellow-800{% else %}bg-purple-100 text-purple-800{% endif %}">
+                                            {{ order.status }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ order.grand_total }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-6 py-4 border-t border-gray-200 text-right">
+                        <a href="{{ url_for('admin_orders') }}" class="text-primary text-sm font-medium hover:underline">View all orders →</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

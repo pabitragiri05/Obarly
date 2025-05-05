@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obarly - Bar & Restaurant Supply</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="flex flex-col items-center ">
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-4 bg-white shadow-md rounded-b-3xl">
+        <a href="http://127.0.0.1:5000/" class="text-3xl font-bold text-gray-900 hover:text-green-500 transition">OBARLY</a>
+        
+        <div class="flex items-center mx-auto relative">
+            <form action="{{ url_for('search') }}" method="GET" class="w-full relative">
+                <input type="text" name="q" value="{{ query }}" 
+                       class="px-4 py-2 text-base border-2 rounded-full outline-none focus:border-green-400 transition w-[750px]" 
+                       placeholder="Search for products..."
+                       id="search-input"
+                       autocomplete="off">
+                <button type="submit" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/search.png" alt="Search" class="w-5 h-5 opacity-70 hover:opacity-100 transition">
+                </button>
+                <div id="search-suggestions" class="absolute top-full left-0 w-[750px] bg-white rounded-lg shadow-lg mt-2 hidden z-50">
+                    <!-- Suggestions will be populated here -->
+                </div>
+            </form>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <a href="http://127.0.0.1:5000/cart" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/shopping-cart.png" alt="Cart" class="w-6 h-6">
+            </a>
+            <a href="http://127.0.0.1:5000/wishlist" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/like.png" alt="Favorites" class="w-6 h-6">
+            </a>
+            <button id="more-button" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/more.png" alt="More" class="w-6 h-6">
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-screen-xl flex flex-col items-start px-6 mt-24 gap-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <nav class="flex justify-between items-center p-5 border-b border-gray-200 uppercase text-gray-600 text-sm">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <a href="{{ url_for('product') }}" class="flex items-center gap-1 hover:text-green-500 transition">
+                        <svg class="w-4 h-4" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <polygon points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256" />
+                        </svg>
+                        Back to all Products
+                    </a>
+                </div>
+            </nav>
+    
+            <div class="flex flex-col md:flex-row">
+                <!-- Product Image -->
+                <div class="w-full md:w-1/2 p-6 flex justify-center">
+                    <img class="h-[500px] object-cover" src="{{ product['image_path'] }}" alt="{{ product['product_name'] }}">
+                </div>
+    
+                <!-- Product Info -->
+                <div class="w-full md:w-1/2 p-6 border-l border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-700 uppercase">{{ product['product_name'] }}</h2>
+                    <h4 class="text-sm text-gray-500 uppercase mt-2">{{ product['Sub_category'] }}</h4>
+                    <h1 class="text-3xl font-bold mt-4" style="color: rgb(48,92,60)">₹{{ product['default_price'] }}</h1>
+                    <p class="text-gray-600 text-sm mt-4">{{ product['description'] }}</p>
+                    <div class="flex items-center gap-4 mt-6">
+                        <div class="flex items-center border rounded-md quantity-selector" data-product-id="{{ product['_id'] }}">
+                            <button class="quantity-btn minus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity-input w-16 text-center border-x px-2 py-2" 
+                                   value="{{ cart_quantities.get(product['_id'], 0) }}" min="0" 
+                                   data-product-id="{{ product['_id'] }}">
+                            <button class="quantity-btn plus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="add-to-cart-btn text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(48,92,60)" data-product-id="{{ product['_id'] }}">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <section class="w-full max-w-screen-xl mx-auto mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Similar Items</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                {% for similar_product in similar_products %}
+                    <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                        <a href="{{ url_for('product_view', product_id=similar_product['_id']) }}" class="block">
+                            <img src="{{ similar_product['image_path'] }}" class="w-full h-48 object-cover rounded-md" alt="{{ similar_product['product_name'] }}">
+                            <h4 class="text-lg font-bold mt-2">{{ similar_product['product_name'] }}</h4>
+                            <p class="text-sm text-gray-600 truncate">{{ similar_product['description'] }}</p>
+                        </a>
+                        <!-- Wishlist Heart Button -->
+                        <button class="absolute top-7 right-4 transition toggle-heart" data-product-id="{{ similar_product['_id'] }}">
+                            <i class="fas fa-heart text-xl {{ 'text-red-500' if similar_product['_id'] in wishlist else 'text-gray-400' }}"></i>
+                        </button>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-lg font-bold" style="color: rgb(48,92,60)">₹{{ similar_product['default_price'] }}</span>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center border rounded-md similar-quantity-selector {% if similar_product['_id'] not in cart_quantities %}hidden{% endif %}" data-product-id="{{ similar_product['_id'] }}">
+                                    <button class="similar-quantity-btn minus px-2 py-1 hover:bg-gray-100" data-product-id="{{ similar_product['_id'] }}">
+                                        <i class="fas fa-minus text-sm"></i>
+                                    </button>
+                                    <input type="number" class="similar-quantity-input w-12 text-center border-x px-1 py-1 text-sm" 
+                                           value="{{ cart_quantities.get(similar_product['_id'], 0) }}" min="0" 
+                                           data-product-id="{{ similar_product['_id'] }}">
+                                    <button class="similar-quantity-btn plus px-2 py-1 hover:bg-gray-100" data-product-id="{{ similar_product['_id'] }}">
+                                        <i class="fas fa-plus text-sm"></i>
+                                    </button>
+                                </div>
+                                <button class="similar-add-to-cart-btn text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(48,92,60)" data-product-id="{{ similar_product['_id'] }}">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full bg-gray-900 text-white py-12 mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3">Company</h4>
+                <p>Zomato Hyperpure Private Limited</p>
+                <p>Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p>New Delhi - 110019</p>
+                <p>CIN: U74900DL2015PTC286208</p>
+                <p class="flex items-center"><span class="mr-2">📞</span> 011-41171717</p>
+                <p class="flex items-center"><span class="mr-2">📧</span> help@obarly.com</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Know More</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Corporate Announcements</a></li>
+                    <li><a href="#" class="hover:underline">Privacy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="hover:underline">Weather Union</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Follow us on</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="logo/obar_bg.png" alt="OBARLY Logo" class="w-36 mb-3">
+                <div class="flex space-x-4">
+                    <a href="#"><img src="logo/footer_img/google play.png" alt="Google Play" class="w-28"></a>
+                    <a href="#"><img src="logo/footer_img/app store.png" alt="App Store" class="w-28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 mt-8 pt-4 text-center text-sm text-gray-500">
+            <p>License No. 10020064002537</p>
+            <p>Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInputs = document.querySelectorAll('.quantity-input, .similar-quantity-input');
+            const plusButtons = document.querySelectorAll('.quantity-btn.plus, .similar-quantity-btn.plus');
+            const minusButtons = document.querySelectorAll('.quantity-btn.minus, .similar-quantity-btn.minus');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn, .similar-add-to-cart-btn');
+
+            // Function to update all quantity inputs for a product
+            function updateAllQuantityInputs(productId, quantity) {
+                // Update all quantity inputs for this product
+                document.querySelectorAll(`.quantity-input[data-product-id="${productId}"], .similar-quantity-input[data-product-id="${productId}"]`).forEach(input => {
+                    input.value = quantity;
+                });
+
+                // Update cart quantity display if it exists
+                const cartQuantityDisplay = document.querySelector(`.cart-quantity[data-product-id="${productId}"]`);
+                if (cartQuantityDisplay) {
+                    cartQuantityDisplay.textContent = quantity;
+                }
+            }
+
+            // Function to update cart quantity
+            async function updateCartQuantity(productId, quantity) {
+                try {
+                    const response = await fetch(`/add-to-cart/${productId}?quantity=${quantity}`);
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        // Update all quantity displays with the new quantity
+                        updateAllQuantityInputs(productId, data.quantity);
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                return false;
+            }
+
+            // Handle quantity changes
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', async function() {
+                    const productId = this.dataset.productId;
+                    const quantity = parseInt(this.value);
+                    
+                    if (quantity < 0) {
+                        this.value = 0;
+                        await updateCartQuantity(productId, 0);
+                        return;
+                    }
+
+                    await updateCartQuantity(productId, quantity);
+                });
+            });
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"], .similar-quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) + 1;
+                    await updateCartQuantity(productId, newQuantity);
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"], .similar-quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) - 1;
+                    
+                    if (newQuantity >= 0) {
+                        await updateCartQuantity(productId, newQuantity);
+                    }
+                });
+            });
+
+            // Handle add to cart button click
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"], .similar-quantity-input[data-product-id="${productId}"]`);
+                    const quantity = parseInt(input.value) || 1;
+                    
+                    if (await updateCartQuantity(productId, quantity)) {
+                        window.location.href = "{{ url_for('cart') }}";
+                    }
+                });
+            });
+
+            // Initialize quantities from cart
+            async function initializeQuantities() {
+                try {
+                    // Get initial quantities from the cart_quantities variable passed from the server
+                    const cartQuantities = {{ cart_quantities | tojson }};
+                    
+                    // Update all quantity inputs with the cart quantities
+                    for (const [productId, quantity] of Object.entries(cartQuantities)) {
+                        updateAllQuantityInputs(productId, quantity);
+                    }
+                } catch (error) {
+                    console.error('Error initializing quantities:', error);
+                }
+            }
+
+            // Call initialization function
+            initializeQuantities();
+
+            const wishlistButtons = document.querySelectorAll('.toggle-heart');
+            
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const heartIcon = this.querySelector('i');
+                    const isInWishlist = heartIcon.classList.contains('text-red-500');
+                    
+                    try {
+                        const endpoint = isInWishlist ? `/remove_from_wishlist/${productId}` : `/add_to_wishlist/${productId}`;
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.status === 'success') {
+                            // Update all heart icons for this product
+                            const allHeartIcons = document.querySelectorAll(`[data-product-id="${productId}"] i`);
+                            allHeartIcons.forEach(icon => {
+                                icon.classList.toggle('text-red-500');
+                                icon.classList.toggle('text-gray-400');
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            const searchInput = document.getElementById('search-input');
+            const suggestionsContainer = document.getElementById('search-suggestions');
+            let debounceTimer;
+
+            searchInput.addEventListener('input', function() {
+                clearTimeout(debounceTimer);
+                const query = this.value.trim();
+                
+                if (query.length < 2) {
+                    suggestionsContainer.classList.add('hidden');
+                    return;
+                }
+
+                debounceTimer = setTimeout(async () => {
+                    try {
+                        const response = await fetch(`/search-suggestions?q=${encodeURIComponent(query)}`);
+                        const suggestions = await response.json();
+                        
+                        if (suggestions.length > 0) {
+                            suggestionsContainer.innerHTML = suggestions.map(suggestion => `
+                                <a href="{{ url_for('product_view', product_id='') }}${suggestion.id}" 
+                                   class="flex items-center gap-3 p-3 hover:bg-gray-100 transition cursor-pointer">
+                                    <img src="${suggestion.image}" class="w-12 h-12 object-cover rounded" alt="${suggestion.name}">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-900">${suggestion.name}</h4>
+                                        <p class="text-sm text-gray-500 truncate">${suggestion.description}</p>
+                                    </div>
+                                </a>
+                            `).join('');
+                            suggestionsContainer.classList.remove('hidden');
+                        } else {
+                            suggestionsContainer.classList.add('hidden');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching suggestions:', error);
+                        suggestionsContainer.classList.add('hidden');
+                    }
+                }, 300);
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            });
+
+            // Hide suggestions when submitting the form
+            document.querySelector('form').addEventListener('submit', function() {
+                suggestionsContainer.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

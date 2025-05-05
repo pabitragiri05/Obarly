@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - OBARLY</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('admin_page') }}">Admin Panel</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Edit Product</h1>
+
+        <form action="{{ url_for('edit_product', product_id=product['_id']) }}" method="POST">
+            <label for="product_name">Product Name:</label>
+            <input type="text" name="product_name" value="{{ product['product_name'] }}" required>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" value="{{ product['default_price'] }}" required>
+
+            <label for="categories">Categories (comma separated):</label>
+            <input type="text" name="categories" value="{{ ', '.join(product['categories']) }}" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" required>{{ product['description'] }}</textarea>
+
+            <label for="image">Product Image URL:</label>
+            <input type="text" name="image" value="{{ product['image_path'] }}" required>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+
+</body>
+</html>

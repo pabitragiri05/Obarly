@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Obarly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a5f3f',
+                        secondary: '#d4af37',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gray: '#6c757d',
+                        lightGray: '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-lightGray">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-white hover:text-secondary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </a>
+                <img src="/static/images/obar.png" alt="Obarly Logo" class="h-12">
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-white hover:text-secondary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </a>
+                <span class="bg-secondary text-primary rounded-full px-2 py-1 text-xs font-bold">3</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                {% if session.get('user_name') %}
+                    <a href="{{ url_for('my_orders') }}" class="text-white hover:text-secondary transition-colors">My Orders</a>
+                    <a href="/cart" class="text-white hover:text-secondary transition-colors">Cart</a>
+                    <span class="text-white">Welcome, {{ session.get('user_name') }}!</span>
+                    <a href="{{ url_for('logout') }}" class="text-white hover:text-secondary transition-colors">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="text-white hover:text-secondary transition-colors">Login</a>
+                    <a href="{{ url_for('signup') }}" class="text-white hover:text-secondary transition-colors">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Steps -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
+                    <span class="mt-2 text-sm font-medium text-primary">Cart</span>
+                </div>
+                <div class="h-1 flex-1 bg-primary mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</div>
+                    <span class="mt-2 text-sm font-medium text-primary">Details</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">3</div>
+                    <span class="mt-2 text-sm font-medium text-gray-500">Payment</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">4</div>
+                    <span class="mt-2 text-sm font-medium text-gray-500">Review</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Column - Delivery Details -->
+            <div class="lg:w-2/3">
+                <h1 class="font-serif text-3xl text-primary mb-6">Delivery Information</h1>
+                <form id="checkoutForm" class="space-y-6">
+                    <!-- Customer Information -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-semibold mb-4">Customer Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" id="first_name" name="first_name" required
+                                    class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" required
+                                    class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Phone</label>
+                                <input type="tel" id="phone" name="phone" required
+                                    class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-semibold mb-4">Shipping Address</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Street Address</label>
+                                <input type="text" id="street" name="street" required
+                                    class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">City</label>
+                                    <input type="text" id="city" name="city" required
+                                        class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">State</label>
+                                    <input type="text" id="state" name="state" required
+                                        class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">ZIP Code</label>
+                                    <input type="text" id="zip_code" name="zip_code" required
+                                        class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-semibold mb-4">Payment Method</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 rounded-md border border-gray-300 bg-gray-50">
+                                <input type="radio" id="payment_cod" name="payment_method" value="cod" class="h-4 w-4 text-primary focus:ring-primary" checked>
+                                <label for="payment_cod" class="ml-3 block text-sm font-medium text-gray-700">
+                                    Cash on Delivery
+                                </label>
+                            </div>
+                            <div class="flex items-center p-3 rounded-md border border-red-200 bg-red-50 opacity-50">
+                                <input type="radio" id="payment_credit" name="payment_method" value="credit_card" class="h-4 w-4 text-red-500 focus:ring-red-500" disabled>
+                                <label for="payment_credit" class="ml-3 block text-sm font-medium text-red-500">
+                                    Credit Card
+                                </label>
+                            </div>
+                            <div class="flex items-center p-3 rounded-md border border-red-200 bg-red-50 opacity-50">
+                                <input type="radio" id="payment_debit" name="payment_method" value="debit_card" class="h-4 w-4 text-red-500 focus:ring-red-500" disabled>
+                                <label for="payment_debit" class="ml-3 block text-sm font-medium text-red-500">
+                                    Debit Card
+                                </label>
+                            </div>
+                            <div class="flex items-center p-3 rounded-md border border-red-200 bg-red-50 opacity-50">
+                                <input type="radio" id="payment_upi" name="payment_method" value="upi" class="h-4 w-4 text-red-500 focus:ring-red-500" disabled>
+                                <label for="payment_upi" class="ml-3 block text-sm font-medium text-red-500">
+                                    UPI
+                                </label>
+                            </div>
+                            <div class="flex items-center p-3 rounded-md border border-red-200 bg-red-50 opacity-50">
+                                <input type="radio" id="payment_net" name="payment_method" value="net_banking" class="h-4 w-4 text-red-500 focus:ring-red-500" disabled>
+                                <label for="payment_net" class="ml-3 block text-sm font-medium text-red-500">
+                                    Net Banking
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span>₹{{ "%.2f"|format(total_price) }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Tax (18%)</span>
+                                <span>₹{{ "%.2f"|format(tax) }}</span>
+                            </div>
+                            <div class="flex justify-between font-semibold text-lg">
+                                <span>Total</span>
+                                <span>₹{{ "%.2f"|format(total_price + tax) }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Place Order Button -->
+                    <div class="flex justify-end">
+                        <button type="button" onclick="placeOrder()"
+                            class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Place Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Right Column - Order Summary -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                    <h2 class="font-serif text-xl text-primary mb-4">Order Summary</h2>
+                    {% for product in products %}
+                    <div class="flex items-center justify-between mb-2">
+                        <div>
+                            <div class="font-medium">{{ product.name }}</div>
+                            <div class="text-gray-500 text-sm">Qty: {{ product.quantity }}</div>
+                        </div>
+                        <div class="font-medium">₹{{ product.price * product.quantity }}</div>
+                    </div>
+                    {% endfor %}
+                    <div class="border-b pb-4 mb-4"></div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Subtotal</span>
+                        <span class="font-medium">₹{{ total_price }}</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Taxes</span>
+                        <span class="font-medium">₹{{ tax }}</span>
+                    </div>
+                    <div class="flex justify-between mb-6">
+                        <span class="font-bold">Total</span>
+                        <span class="font-bold text-lg">₹{{ total_price + tax }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+            <svg class="mx-auto mb-4 text-green-500" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2l4 -4"/><circle cx="12" cy="12" r="10"/></svg>
+            <h2 class="text-2xl font-bold mb-2 text-primary">Order Placed!</h2>
+            <p class="mb-6 text-gray-700">Your order has been placed successfully. Thank you for shopping with us!</p>
+            <div class="flex flex-col space-y-3">
+                <a href="/" class="bg-primary text-white px-6 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+                    Go to Home
+                </a>
+                <a href="/my-orders" class="bg-secondary text-primary px-6 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+                    View My Orders
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+            <svg class="mx-auto mb-4 text-yellow-500" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <h2 class="text-2xl font-bold mb-2 text-primary">Confirm Order</h2>
+            <p class="mb-6 text-gray-700">Are you sure you want to place this order?</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="hideConfirmationModal()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-400 transition-colors">
+                    Cancel
+                </button>
+                <button onclick="proceedWithOrder()" class="bg-primary text-white px-6 py-2 rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+    function validateForm() {
+        const requiredFields = [
+            { id: 'first_name', name: 'First Name' },
+            { id: 'last_name', name: 'Last Name' },
+            { id: 'phone', name: 'Phone' },
+            { id: 'street', name: 'Street Address' },
+            { id: 'city', name: 'City' },
+            { id: 'state', name: 'State' },
+            { id: 'zip_code', name: 'ZIP Code' }
+        ];
+
+        let isValid = true;
+        let missingFields = [];
+
+        requiredFields.forEach(field => {
+            const element = document.getElementById(field.id);
+            if (!element.value.trim()) {
+                isValid = false;
+                missingFields.push(field.name);
+                element.classList.add('border-red-500');
+            } else {
+                element.classList.remove('border-red-500');
+            }
+        });
+
+        // Check if a payment method is selected
+        const selectedPayment = document.querySelector('input[name="payment_method"]:checked');
+        if (!selectedPayment) {
+            isValid = false;
+            alert('Please select a payment method');
+            return false;
+        }
+
+        if (!isValid) {
+            alert('Please fill in all required fields:\n' + missingFields.join('\n'));
+            return false;
+        }
+
+        return true;
+    }
+
+    function showConfirmationModal() {
+        if (!validateForm()) {
+            return;
+        }
+        document.getElementById('confirmationModal').classList.remove('hidden');
+    }
+
+    function hideConfirmationModal() {
+        document.getElementById('confirmationModal').classList.add('hidden');
+    }
+
+    function proceedWithOrder() {
+        hideConfirmationModal();
+        const customer = {
+            first_name: document.getElementById('first_name').value,
+            last_name: document.getElementById('last_name').value,
+            phone: document.getElementById('phone').value
+        };
+
+        const address = {
+            street: document.getElementById('street').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            zip_code: document.getElementById('zip_code').value
+        };
+
+        // Get the selected payment method from radio buttons
+        const payment_method = document.querySelector('input[name="payment_method"]:checked').value;
+
+        fetch('/place-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                customer: customer,
+                address: address,
+                payment_method: payment_method
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                document.getElementById('successModal').classList.remove('hidden');
+            } else {
+                alert(data.message || 'Failed to place order');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to place order. Please try again.');
+        });
+    }
+
+    function placeOrder() {
+        if (!validateForm()) {
+            return;
+        }
+        showConfirmationModal();
+    }
+
+    // Add input event listeners to remove red border when user starts typing
+    document.querySelectorAll('input, select').forEach(element => {
+        element.addEventListener('input', function() {
+            this.classList.remove('border-red-500');
+        });
+    });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="max-w-6xl mx-auto px-5 flex flex-wrap justify-between gap-10">
+            <!-- Column 1 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Company</h4>
+                <p class="text-white/80 text-sm mb-3">Zomato Hyperpure Private Limited</p>
+                <p class="text-white/80 text-sm mb-3">Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p class="text-white/80 text-sm mb-3">New Delhi - 110019</p>
+                <p class="text-white/80 text-sm mb-3">CIN: U74900DL2015PTC286208</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📞</span> 011-41171717</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📧</span> help@obarly.com</p>
+            </div>
+            
+            <!-- Column 2 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Know More</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Corporate Announcements</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Privacy</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Terms of Use</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Weather Union</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 3 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Follow us on</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">LinkedIn</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Instagram</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 4 -->
+            <div class="min-w-[250px] flex-1">
+                <img src="images/obar_bg.png" alt="OBARLY Logo" class="w-[150px] mb-5 filter brightness-0 invert">
+                <div class="flex gap-4 mt-5 flex-wrap">
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/google play.png" alt="Google Play" class="w-[140px] rounded-lg">
+                    </a>
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/app store.png" alt="App Store" class="w-[140px] rounded-lg">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-5 mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/60">
+            <p>License No. 10020064002537</p>
+            <p class="mt-2">Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

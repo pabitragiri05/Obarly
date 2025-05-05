@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obarly - Bar & Restaurant Supply</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <script src="/firebaseauth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="relative w-full h-[860px] flex flex-col">
+        <!-- Header Section -->
+        <header class="absolute top-0 left-0 w-full flex justify-between items-center px-12 py-4 z-10 rounded-b-3xl" style="background-color: rgb(48,92,60);">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-white hover:text-secondary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </a>
+                <div class="logo">
+                    <img src="/static/images/obar.png" alt="OBARLY Logo" class="w-28 h-28 object-contain">
+                </div>
+            </div>
+            <nav class="flex space-x-4 items-center">
+                {% if session.get('user_name') %}
+                    <div class="flex items-center space-x-4">
+                        <a href="{{ url_for('my_orders') }}" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">My Orders</a>
+                        <a href="/cart" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">Cart</a>
+                        <span class="text-white text-lg font-medium">Welcome, {{ session.get('user_name') }}!</span>
+                        {% if session.get('user_role') == 'admin' %}
+                            <a href="{{ url_for('admin') }}" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">Admin Panel</a>
+                        {% endif %}
+                        <a href="{{ url_for('logout') }}" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">Logout</a>
+                    </div>
+                {% else %}
+                    <button onclick="showLoginForm()" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">Login/Signup</button>
+                {% endif %}
+                <a href="/about" class="text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">About Us</a>
+            </nav>
+        </header>
+    
+        <!-- Hero Section -->
+        <section class="relative flex items-center justify-center text-center text-white bg-cover bg-top h-[800px]" style="background-image: url('background/backg.webp')">
+            <!-- Background Overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-50" style="clip-path: ellipse(100% 70% at 50% 30%);">
+                <img src="/static/images/backgroud.avif" alt="" class="absolute inset-0 w-full h-full object-cover">
+            </div>            
+            
+            <div class="relative z-10">
+                <p class="text-xl">20+ categories | 2000+ Products</p>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">On Time Bar And Restaurant Supply</h1>
+                <button onclick="handleShopNow()" class="px-6 py-3 text-2xl text-white rounded-full transition transform hover:scale-105" style="background-color: rgb(48,92,60)">Shop now</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Form (Hidden by default) -->
+    <div id="loginForm" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div class="bg-white rounded-[5rem] p-6 w-72 h-auto mx-4 overflow-y-auto shadow-2xl" style="background-color: rgb(48,92,60);">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-white">Sign in</h2>
+                <button onclick="hideForms()" class="text-white hover:text-gray-300 transition-colors duration-300">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-3 p-2 rounded-[4rem] text-xs {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form class="space-y-3" action="{{ url_for('login') }}" method="POST">
+                <div>
+                    <label for="email" class="block text-xs font-medium text-white mb-1">Email address</label>
+                    <input id="email" name="email" type="email" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-[4rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white text-gray-800 placeholder-gray-500 text-xs">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-medium text-white mb-1">Password</label>
+                    <input id="password" name="password" type="password" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-[4rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white text-gray-800 placeholder-gray-500 text-xs">
+                </div>
+
+                <div class="pt-3">
+                    <button type="submit"
+                        class="w-full flex justify-center py-2 px-3 border border-transparent rounded-[4rem] shadow-sm text-xs font-medium text-green-800 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center">
+                <p class="text-xs text-white">
+                    Don't have an account?
+                    <button onclick="showSignupForm()" class="font-medium text-white hover:text-gray-300 transition-colors duration-300">
+                        Sign up
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Form (Hidden by default) -->
+    <div id="signupForm" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div class="bg-white rounded-[5rem] p-6 w-72 h-auto mx-4 overflow-y-auto shadow-2xl" style="background-color: rgb(48,92,60);">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-white">Create account</h2>
+                <button onclick="hideForms()" class="text-white hover:text-gray-300 transition-colors duration-300">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form class="space-y-3" action="{{ url_for('signup') }}" method="POST">
+                <div>
+                    <label for="name" class="block text-xs font-medium text-white mb-1">Full Name</label>
+                    <input id="name" name="name" type="text" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-[4rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white text-gray-800 placeholder-gray-500 text-xs">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-xs font-medium text-white mb-1">Email address</label>
+                    <input id="email" name="email" type="email" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-[4rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white text-gray-800 placeholder-gray-500 text-xs">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-medium text-white mb-1">Password</label>
+                    <input id="password" name="password" type="password" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-[4rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white bg-white text-gray-800 placeholder-gray-500 text-xs">
+                </div>
+
+                <div class="pt-3">
+                    <button type="submit"
+                        class="w-full flex justify-center py-2 px-3 border border-transparent rounded-[4rem] shadow-sm text-xs font-medium text-green-800 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300">
+                        Sign up
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center">
+                <p class="text-xs text-white">
+                    Already have an account?
+                    <button onclick="showLoginForm()" class="font-medium text-white hover:text-gray-300 transition-colors duration-300">
+                        Sign in
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <section class="py-12 text-center" style="background-color: rgb(48,92,60)">
+        <h2 class="text-3xl font-bold text-white mb-6">Why choose us?</h2>
+        <div class="flex justify-center items-center gap-6 max-w-5xl mx-auto flex-wrap">
+            <div class="bg-white rounded-lg shadow-lg text-center p-6 w-72">
+                <img src="/static/images/why choose/Quality.png" alt="Quality Icon" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-lg font-semibold text-black">Quality</h3>
+                <p class="text-sm text-black">Consistency</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg text-center p-6 w-72">
+                <img src="/static/images/why choose/Market.png" alt="Vendor Icon" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-lg font-semibold text-black">Single Vendor</h3>
+                <p class="text-sm text-black">Marketplace</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg text-center p-6 w-72">
+                <img src="/static/images/why choose/Delivery.png" alt="Delivery Icon" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-lg font-semibold text-black">Next Day</h3>
+                <p class="text-sm text-black">Delivery</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="py-12 text-center">
+        <h2 class="text-3xl font-bold text-black mb-4">Buy just about anything</h2>
+        <p class="text-lg text-black mb-12">20+ categories • 2000+ products</p>
+
+        {% for section in categorized_products %}
+        <div class="mb-16 max-w-7xl mx-auto">
+            <h3 class="text-2xl font-bold text-black text-left uppercase mb-6">
+                {{ section.category_name }}
+            </h3>
+            <div class="flex justify-center gap-4 p-2 flex-nowrap overflow-x-auto no-scrollbar">
+            {% for product in section.products[:5] %}
+                <a href="{{ url_for('product', category=product['categories']|lower, product_name=product['name']|lower|replace(' ', '-') ) }}"
+                class="bg-white rounded-lg shadow-md overflow-hidden w-[230px] transition-transform transform hover:scale-105 min-w-[230px]">
+                <img src="{{ product['image_path'].split('#')[0] }}"
+                    alt="{{ product['name'] }}"
+                    class="w-full h-40 object-cover">
+                <p class="text-black font-semibold py-2 text-center">{{ product['name'] }}</p>
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Category Navigation -->
+    <nav class="bg-white shadow-md p-4 mt-4">
+        <div class="container mx-auto">
+            <ul class="flex space-x-6">
+                {% for category in categories %}
+                <li>
+                    <a href="{{ url_for('category', category_name=category.name) }}"
+                       class="px-4 py-2 rounded-lg {% if selected_category == category.name %}bg-green-500 text-white{% else %}text-gray-700 hover:bg-green-400 hover:text-white{% endif %} transition">
+                        {{ category.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Footer Section -->
+    <footer class="w-full bg-gray-900 text-white py-12 mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3">Company</h4>
+                <p>Zomato Hyperpure Private Limited</p>
+                <p>Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p>New Delhi - 110019</p>
+                <p>CIN: U74900DL2015PTC286208</p>
+                <p class="flex items-center"><span class="mr-2">📞</span> 011-41171717</p>
+                <p class="flex items-center"><span class="mr-2">📧</span> help@obarly.com</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Know More</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Corporate Announcements</a></li>
+                    <li><a href="#" class="hover:underline">Privacy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="hover:underline">Weather Union</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Follow us on</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="/static/images/obar.png" alt="OBARLY Logo" class="w-36 mb-3">
+                <div class="flex space-x-4">
+                    <a href="#"><img src="/static/images/google play.png" alt="Google Play" class="w-28"></a>
+                    <a href="#"><img src="/static/images/app store.png" alt="App Store" class="w-28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 mt-8 pt-4 text-center text-sm text-gray-500">
+            <p>License No. 10020064002537</p>
+            <p>Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+<script src="{{url_for('static', filename='js/nav.js')}}"></script>
+<script src="{{url_for('static', filename='js/auth.js')}}"></script>
+<script>
+function handleShopNow() {
+    {% if session.get('user_name') %}
+        // User is logged in, redirect to products page
+        window.location.href = '{{ url_for("product") }}';
+    {% else %}
+        // User is not logged in, show login form
+        showLoginForm();
+    {% endif %}
+}
+
+function showLoginForm() {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('signupForm').classList.add('hidden');
+}
+
+function showSignupForm() {
+    document.getElementById('signupForm').classList.remove('hidden');
+    document.getElementById('loginForm').classList.add('hidden');
+}
+
+function hideForms() {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('signupForm').classList.add('hidden');
+}
+</script>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBARLY - Wishlist</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="flex flex-col items-center">
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-4 bg-white shadow-md rounded-b-3xl">
+        <a href="/" class="grow-3 text-3xl font-bold text-gray-900 hover:text-green-500 transition">OBARLY</a>
+        
+        <div class="flex items-center mx-auto relative">
+            <input type="text" class="px-4 py-2 text-base border-2 rounded-full outline-none focus:border-green-400 transition w-[750px]" placeholder="Search for products...">
+            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer">
+                <img src="https://img.icons8.com/material-outlined/24/000000/search.png" alt="Search" class="w-5 h-5 opacity-70 hover:opacity-100 transition">
+            </button>
+        </div>
+        
+        <div class="grow-3 flex items-center gap-4">
+            <a href="/cart" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/shopping-cart.png" alt="Cart" class="w-6 h-6">
+            </a>
+            <a href="/wishlist" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/like.png" alt="Favorites" class="w-6 h-6">
+            </a>
+            <button id="more-button" class="p-2 hover:scale-110 transition">
+                <img src="https://img.icons8.com/material-outlined/24/000000/more.png" alt="More" class="w-6 h-6">
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-screen-xl flex flex-col items-start px-6 mt-24 gap-6">
+        <div class="w-full">
+            <h1 class="text-3xl font-bold mb-6">Wishlist</h1>
+            
+            {% if products %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for product in products %}
+                <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                    <a href="{{ url_for('product_view', product_id=product['_id']) }}" class="block">
+                        <img src="{{ product['image'] }}" class="w-full h-48 object-cover rounded-md" alt="{{ product['name'] }}">
+                        <h4 class="text-lg font-bold mt-2">{{ product['name'] }}</h4>
+                        <p class="text-sm text-gray-600 truncate">{{ product['description'] }}</p>
+                    </a>
+
+                    <!-- Wishlist Heart Button -->
+                    <button class="absolute top-7 right-4 transition toggle-heart" data-product-id="{{ product['_id'] }}">
+                        <i class="fas fa-heart text-xl text-red-500"></i>
+                    </button>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-green-600">₹{{ product['price'] }}</span>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border rounded-md quantity-selector hidden" data-product-id="{{ product['_id'] }}">
+                                <button class="quantity-btn minus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" class="quantity-input w-16 text-center border-x px-2 py-2" 
+                                       value="{{ cart_quantities.get(product['_id'], 1) }}" min="1" 
+                                       data-product-id="{{ product['_id'] }}">
+                                <button class="quantity-btn plus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <button class="add-to-cart-btn text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(48,92,60)" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-12">
+                <i class="fas fa-heart text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600">Your wishlist is empty</h3>
+                <p class="text-gray-500 mt-2">Add some products to your wishlist to see them here</p>
+                <a href="{{ url_for('product') }}" class="mt-4 inline-block bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition">
+                    Continue Shopping
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wishlistButtons = document.querySelectorAll('.toggle-heart');
+            
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const heartIcon = this.querySelector('i');
+                    
+                    try {
+                        const response = await fetch(`/remove_from_wishlist/${productId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.status === 'success') {
+                            // Remove the product card from the DOM
+                            this.closest('.bg-white').remove();
+                            
+                            // Update heart icons on other pages
+                            const otherHeartIcons = document.querySelectorAll(`[data-product-id="${productId}"] i`);
+                            otherHeartIcons.forEach(icon => {
+                                icon.classList.remove('text-red-500');
+                                icon.classList.add('text-gray-400');
+                            });
+                            
+                            // If no products left, show empty state
+                            if (document.querySelectorAll('.bg-white').length === 0) {
+                                const emptyState = `
+                                    <div class="text-center py-12">
+                                        <i class="fas fa-heart text-6xl text-gray-300 mb-4"></i>
+                                        <h3 class="text-xl font-semibold text-gray-600">Your wishlist is empty</h3>
+                                        <p class="text-gray-500 mt-2">Add some products to your wishlist to see them here</p>
+                                        <a href="{{ url_for('product') }}" class="mt-4 inline-block bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition">
+                                            Continue Shopping
+                                        </a>
+                                    </div>
+                                `;
+                                document.querySelector('.grid').innerHTML = emptyState;
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            const plusButtons = document.querySelectorAll('.quantity-btn.plus');
+            const minusButtons = document.querySelectorAll('.quantity-btn.minus');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            const quantitySelectors = document.querySelectorAll('.quantity-selector');
+
+            // Function to update all quantity inputs for a product
+            function updateAllQuantityInputs(productId, quantity) {
+                document.querySelectorAll(`.quantity-input[data-product-id="${productId}"]`).forEach(input => {
+                    input.value = quantity;
+                });
+            }
+
+            // Function to update cart quantity
+            async function updateCartQuantity(productId, quantity) {
+                try {
+                    const response = await fetch(`/update-cart-quantity/${productId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `quantity=${quantity}`
+                    });
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        updateAllQuantityInputs(productId, data.quantity);
+                        // If quantity is 0, show add to cart button and hide quantity selector
+                        if (data.quantity === 0) {
+                            const addToCartBtn = document.querySelector(`.add-to-cart-btn[data-product-id="${productId}"]`);
+                            const quantitySelector = document.querySelector(`.quantity-selector[data-product-id="${productId}"]`);
+                            addToCartBtn.classList.remove('hidden');
+                            quantitySelector.classList.add('hidden');
+                        }
+                    }
+                    return data;
+                } catch (error) {
+                    console.error('Error:', error);
+                    return { status: 'error' };
+                }
+            }
+
+            // Handle quantity changes
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', async function() {
+                    const productId = this.dataset.productId;
+                    const quantity = parseInt(this.value);
+                    if (quantity < 0) this.value = 0;
+                    await updateCartQuantity(productId, quantity);
+                });
+            });
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) + 1;
+                    input.value = newQuantity;
+                    await updateCartQuantity(productId, newQuantity);
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) - 1;
+                    if (newQuantity >= 0) {
+                        input.value = newQuantity;
+                        await updateCartQuantity(productId, newQuantity);
+                    }
+                });
+            });
+
+            // Handle add to cart
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    const quantity = parseInt(input.value) || 1;
+                    
+                    if (await updateCartQuantity(productId, quantity)) {
+                        window.location.href = "{{ url_for('cart') }}";
+                    }
+                });
+            });
+        });
+    </script>
+
+    <footer class="w-full bg-gray-900 text-white py-12 mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3">Company</h4>
+                <p>Zomato Hyperpure Private Limited</p>
+                <p>Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p>New Delhi - 110019</p>
+                <p>CIN: U74900DL2015PTC286208</p>
+                <p class="flex items-center"><span class="mr-2">📞</span> 011-41171717</p>
+                <p class="flex items-center"><span class="mr-2">📧</span> help@obarly.com</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Know More</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Corporate Announcements</a></li>
+                    <li><a href="#" class="hover:underline">Privacy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="hover:underline">Weather Union</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Follow us on</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="/static/images/obar.png" alt="OBARLY Logo" class="w-36 mb-3">
+                <div class="flex space-x-4">
+                    <a href="#"><img src="/static/images/google play.png" alt="Google Play" class="w-28"></a>
+                    <a href="#"><img src="/static/images/app store.png" alt="App Store" class="w-28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 mt-8 pt-4 text-center text-sm text-gray-500">
+            <p>License No. 10020064002537</p>
+            <p>Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

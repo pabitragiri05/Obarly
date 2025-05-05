@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBARLY</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body class="flex flex-col items-center ">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-4 bg-white shadow-md rounded-b-3xl">
+        <a href="/" class="text-3xl font-bold text-gray-900 hover:text-green-500 transition">OBARLY</a>
+    
+        <div class="flex items-center mx-auto relative">
+        <form action="{{ url_for('search') }}" method="GET" class="w-full relative">
+            <input type="text" name="q" value="{{ query }}" 
+                class="px-4 py-2 text-base border-2 rounded-full outline-none focus:border-green-400 transition w-[750px]" 
+                placeholder="Search for products..."
+                id="search-input"
+                autocomplete="off">
+            <button type="submit" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer">
+            <img src="https://img.icons8.com/material-outlined/24/000000/search.png" alt="Search" class="w-5 h-5 opacity-70 hover:opacity-100 transition">
+            </button>
+        </form>
+        </div>
+    
+        <div class="flex items-center gap-4">
+        <a href="/cart" class="p-2 hover:scale-110 transition">
+            <img src="https://img.icons8.com/material-outlined/24/000000/shopping-cart.png" alt="Cart" class="w-6 h-6">
+        </a>
+        <a href="/wishlist" class="p-2 hover:scale-110 transition">
+            <img src="https://img.icons8.com/material-outlined/24/000000/like.png" alt="Favorites" class="w-6 h-6">
+        </a>
+        <button id="more-button" class="p-2 hover:scale-110 transition">
+            <img src="https://img.icons8.com/material-outlined/24/000000/more.png" alt="More" class="w-6 h-6">
+        </button>
+        </div>
+    </header>
+    
+    <!-- SIDEBAR ONLY (No overlay) -->
+    <div id="sidebar" class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out hidden">
+        <div class="flex items-center justify-between p-4 border-b">
+        <span class="text-lg font-semibold">Menu</span>
+        <button id="close-sidebar" class="text-gray-500 hover:text-red-500 text-xl">✕</button>
+        </div>
+        <ul class="p-4 space-y-4">
+        <li><a href="#" class="block text-gray-700 hover:text-green-500">User Account</a></li>
+        <li><a href="#" class="block text-gray-700 hover:text-green-500">Track Order</a></li>
+        <li><a href="#" class="block text-gray-700 hover:text-green-500">Wishlist</a></li>
+        <li><a href="#" class="block text-gray-700 hover:text-green-500">Help & Support</a></li>
+        <li><a href="#" class="block text-gray-700 hover:text-red-500">Logout</a></li>
+        </ul>
+    </div>
+    
+    <!-- SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const moreButton = document.getElementById('more-button');
+        const closeSidebar = document.getElementById('close-sidebar');
+    
+        function openSidebar() {
+            sidebar.classList.remove('hidden');
+            setTimeout(() => {
+            sidebar.classList.remove('translate-x-full');
+            }, 10);
+        }
+    
+        function closeSidebarMenu() {
+            sidebar.classList.add('translate-x-full');
+            setTimeout(() => {
+            sidebar.classList.add('hidden');
+            }, 300); // wait for transition
+        }
+    
+        moreButton.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarMenu);
+        });
+    </script>
+
+
+    <main class="w-full flex flex-col items-center px-6 mt-24 gap-6">
+        <!-- Top category navbar -->
+        <nav class="w-full shadow-md rounded-xl flex justify-center py-3" style="background-color: rgb(48,92,60)">
+            <ul class="flex gap-5 text-white text-base font-medium">
+                {% for category in categories %}
+                    <li>
+                        <a href="{{ url_for('product') }}?category={{ category }}"
+                           class="px-4 py-2 rounded-lg hover:bg-green-400 transition whitespace-nowrap
+                                  {% if selected_category == category %}text-white{% endif %}"
+                           style ="{% if selected_category == category %}background-color: rgb(76,147,96){% endif %}">
+                            {{ category | capitalize }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>       
+    
+        <div class="w-full max-w-screen-xl flex items-start gap-6">
+            <!-- Sidebar Subcategories -->
+            <aside class="w-64 bg-gray-200 shadow-lg p-6 rounded-xl overflow-y-auto max-h-[80vh]">
+                <ul class="space-y-2">
+                    {% for subcat in subcategories %}
+                        <li>
+                            <a href="{{ url_for('product') }}?category={{ selected_category }}&subcategory={{ subcat | lower }}"
+                               class="block px-3 py-1 text-base rounded-md hover:bg-green-300 hover:text-white transition cursor-pointer
+                               {% if selected_subcategory == subcat %}bg-green-300 text-white{% endif %}">
+                                {{ subcat }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if not subcategories %}
+                        <li class="text-sm text-gray-500">No subcategories</li>
+                    {% endif %}
+                </ul>
+            </aside>
+    
+            <!-- Products Grid -->
+            <section class="w-full container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for product in products %}
+                <div class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition relative">
+                    <a href="{{ url_for('product_view', product_id=product['_id']) }}" class="block">
+                        <img src="{{ product['image'] }}" class="w-full h-48 object-cover rounded-md" alt="{{ product['name'] }}">
+                        <h4 class="text-lg font-bold mt-2">{{ product['name'] }}</h4>
+                        <p class="text-sm text-gray-600 truncate">{{ product['description'] }}</p>
+                    </a>
+    
+                    <!-- Wishlist Heart Button -->
+                    <button class="absolute top-7 right-4 transition toggle-heart hover:text-[rgb(76,147,96)]" data-product-id="{{ product['_id'] }}">
+                        <i class="fas fa-heart text-xl {{ 'text-red-500' if product['_id'] in wishlist else 'text-gray-400' }}"></i>
+                    </button>
+    
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-green-600">₹{{ product['price'] }}</span>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border rounded-md quantity-selector {% if product['_id'] not in cart_quantities %}hidden{% endif %}" data-product-id="{{ product['_id'] }}">
+                                <button class="quantity-btn minus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" class="quantity-input w-16 text-center border-x px-2 py-2" 
+                                       value="{{ cart_quantities.get(product['_id'], 0) }}" min="0" 
+                                       data-product-id="{{ product['_id'] }}">
+                                <button class="quantity-btn plus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <button class="add-to-cart-btn text-white px-4 py-2 rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+    
+        <!-- Wishlist Toggle Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const wishlistButtons = document.querySelectorAll('.toggle-heart');
+                
+                wishlistButtons.forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const productId = this.dataset.productId;
+                        const heartIcon = this.querySelector('i');
+                        const isInWishlist = heartIcon.classList.contains('text-red-500');
+                        
+                        try {
+                            const endpoint = isInWishlist ? `/remove_from_wishlist/${productId}` : `/add_to_wishlist/${productId}`;
+                            const response = await fetch(endpoint, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            
+                            const data = await response.json();
+                            
+                            if (data.status === 'success') {
+                                // Update all heart icons for this product
+                                const allHeartIcons = document.querySelectorAll(`[data-product-id="${productId}"] i`);
+                                allHeartIcons.forEach(icon => {
+                                    icon.classList.toggle('text-red-500');
+                                    icon.classList.toggle('text-gray-400');
+                                });
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('search-input');
+                const suggestionsContainer = document.getElementById('search-suggestions');
+                let debounceTimer;
+
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(debounceTimer);
+                    const query = this.value.trim();
+                    
+                    if (query.length < 2) {
+                        suggestionsContainer.classList.add('hidden');
+                        return;
+                    }
+
+                    debounceTimer = setTimeout(async () => {
+                        try {
+                            const response = await fetch(`/search-suggestions?q=${encodeURIComponent(query)}`);
+                            const suggestions = await response.json();
+                            
+                            if (suggestions.length > 0) {
+                                suggestionsContainer.innerHTML = suggestions.map(suggestion => `
+                                    <a href="{{ url_for('product_view', product_id='') }}${suggestion.id}" 
+                                       class="block p-3 hover:bg-gray-100 transition cursor-pointer">
+                                        <h4 class="font-medium text-gray-900">${suggestion.name}</h4>
+                                    </a>
+                                `).join('');
+                                suggestionsContainer.classList.remove('hidden');
+                            } else {
+                                suggestionsContainer.classList.add('hidden');
+                            }
+                        } catch (error) {
+                            console.error('Error fetching suggestions:', error);
+                            suggestionsContainer.classList.add('hidden');
+                        }
+                    }, 300);
+                });
+
+                // Hide suggestions when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                        suggestionsContainer.classList.add('hidden');
+                    }
+                });
+
+                // Hide suggestions when submitting the form
+                document.querySelector('form').addEventListener('submit', function() {
+                    suggestionsContainer.classList.add('hidden');
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const quantityInputs = document.querySelectorAll('.quantity-input');
+                const plusButtons = document.querySelectorAll('.quantity-btn.plus');
+                const minusButtons = document.querySelectorAll('.quantity-btn.minus');
+                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                const quantitySelectors = document.querySelectorAll('.quantity-selector');
+
+                // Function to update all quantity inputs for a product
+                function updateAllQuantityInputs(productId, quantity) {
+                    document.querySelectorAll(`.quantity-input[data-product-id="${productId}"]`).forEach(input => {
+                        input.value = quantity;
+                    });
+                }
+
+                // Function to toggle visibility of quantity selector and add to cart button
+                function toggleQuantityVisibility(productId, quantity) {
+                    const selector = document.querySelector(`.quantity-selector[data-product-id="${productId}"]`);
+                    const addToCartBtn = document.querySelector(`.add-to-cart-btn[data-product-id="${productId}"]`);
+                    
+                    if (quantity > 0) {
+                        selector.classList.remove('hidden');
+                        if (addToCartBtn) addToCartBtn.classList.add('hidden');
+                    } else {
+                        selector.classList.add('hidden');
+                        if (addToCartBtn) addToCartBtn.classList.remove('hidden');
+                    }
+                }
+
+                // Handle add to cart
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const productId = this.dataset.productId;
+                        const quantity = 1; // Default quantity when adding to cart
+                        
+                        try {
+                            const response = await fetch(`/add-to-cart/${productId}?quantity=${quantity}`);
+                            const data = await response.json();
+                            if (data.status === 'success') {
+                                updateAllQuantityInputs(productId, quantity);
+                                toggleQuantityVisibility(productId, quantity);
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+
+                // Handle quantity changes
+                quantityInputs.forEach(input => {
+                    input.addEventListener('change', async function() {
+                        const productId = this.dataset.productId;
+                        const quantity = parseInt(this.value);
+                        
+                        if (quantity < 0) {
+                            this.value = 0;
+                            toggleQuantityVisibility(productId, 0);
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch(`/add-to-cart/${productId}?quantity=${quantity}`);
+                            const data = await response.json();
+                            if (data.status === 'success') {
+                                updateAllQuantityInputs(productId, quantity);
+                                toggleQuantityVisibility(productId, quantity);
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+
+                plusButtons.forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const productId = this.dataset.productId;
+                        const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                        const newQuantity = parseInt(input.value) + 1;
+                        input.value = newQuantity;
+                        
+                        try {
+                            const response = await fetch(`/add-to-cart/${productId}?quantity=${newQuantity}`);
+                            const data = await response.json();
+                            if (data.status === 'success') {
+                                updateAllQuantityInputs(productId, newQuantity);
+                                toggleQuantityVisibility(productId, newQuantity);
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+
+                minusButtons.forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const productId = this.dataset.productId;
+                        const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                        const newQuantity = parseInt(input.value) - 1;
+                        
+                        if (newQuantity >= 0) {
+                            input.value = newQuantity;
+                            try {
+                                const response = await fetch(`/add-to-cart/${productId}?quantity=${newQuantity}`);
+                                const data = await response.json();
+                                if (data.status === 'success') {
+                                    updateAllQuantityInputs(productId, newQuantity);
+                                    toggleQuantityVisibility(productId, newQuantity);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                            }
+                        }
+                    });
+                });
+
+                // Initialize visibility based on current quantities
+                quantityInputs.forEach(input => {
+                    const productId = input.dataset.productId;
+                    const quantity = parseInt(input.value);
+                    toggleQuantityVisibility(productId, quantity);
+                });
+            });
+        </script>
+    </main>
+    
+
+    <footer class="w-full bg-gray-900 text-white py-12 mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3">Company</h4>
+                <p>Zomato Hyperpure Private Limited</p>
+                <p>Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p>New Delhi - 110019</p>
+                <p>CIN: U74900DL2015PTC286208</p>
+                <p class="flex items-center"><span class="mr-2">📞</span> 011-41171717</p>
+                <p class="flex items-center"><span class="mr-2">📧</span> help@obarly.com</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Know More</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Corporate Announcements</a></li>
+                    <li><a href="#" class="hover:underline">Privacy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="hover:underline">Weather Union</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Follow us on</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="/static/images/obar.png" alt="OBARLY Logo" class="w-36 mb-3">
+                <div class="flex space-x-4">
+                    <a href="#"><img src="/static/images/google play.png" alt="Google Play" class="w-28"></a>
+                    <a href="#"><img src="/static/images/app store.png" alt="App Store" class="w-28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 mt-8 pt-4 text-center text-sm text-gray-500">
+            <p>License No. 10020064002537</p>
+            <p>Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Obarly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a5f3f',
+                        secondary: '#d4af37',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gray: '#6c757d',
+                        lightGray: '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .owner-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: #d4af37;
+        }
+        .about-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #d4af37;
+        }
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #d4af37;
+        }
+        @media (max-width: 992px) {
+            .about-content h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen font-sans text-dark bg-light">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-primary to-[#3a7d44] text-white text-center py-[100px] px-5 md:py-[80px]">
+        <div class="about-header::before"></div>
+        <img src="/static/images/obar.png" alt="Obarly Logo" class="absolute top-[30px] left-[40px] w-[120px] filter brightness-0 invert z-10">
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="font-serif text-4xl md:text-5xl font-semibold mb-0 text-white drop-shadow">About Us</h1>
+            <p class="text-xl md:text-[1.3rem] mt-4 opacity-90 max-w-3xl mx-auto">Discover our journey and meet the visionary behind our success story</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex justify-center items-center py-16 px-5">
+        <div class="flex flex-col lg:flex-row items-start gap-12 lg:gap-16 bg-white rounded-lg shadow-xl py-12 lg:py-16 px-8 lg:px-16 max-w-6xl w-full relative -mt-12 z-10">
+            <!-- Owner Section -->
+            <div class="flex-1 text-center">
+                <img src="/static/images/owner.jpeg" alt="Mr. Kartikey Aggarwal - Founder & CEO" class="w-full max-w-[350px] mx-auto rounded-lg border-[10px] border-white shadow-lg hover:scale-102 transition-transform duration-300">
+                <p class="font-serif text-xl md:text-[1.4rem] font-semibold mt-5 text-primary relative inline-block owner-name">Mr. Kartikey Aggarwal</p>
+                <p class="text-gray-600">Founder & CEO</p>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="flex-2 lg:flex-[2]">
+                <h2 class="font-serif text-2xl md:text-[2.2rem] text-primary mb-6 pb-3 relative about-content-h2">Our Heritage</h2>
+                <p class="text-gray-600 text-base md:text-[1.1rem] leading-relaxed mb-5">
+                    Established in <strong class="text-primary font-semibold">2018</strong> by visionary entrepreneur <strong class="text-primary font-semibold">Kartikey Aggarwal</strong>, 
+                    <strong class="text-primary font-semibold">Obarly</strong> stands as India's pioneering enterprise dedicated to revolutionizing 
+                    the supply chain for <strong class="text-primary font-semibold">premium disposable items, housekeeping essentials, 
+                    artisanal wooden kitchenware, and innovative food packaging solutions</strong>.
+                </p>
+                <p class="text-gray-600 text-base md:text-[1.1rem] leading-relaxed mb-5">
+                    We serve distinguished clients across <strong class="text-primary font-semibold">fine dining establishments, luxury bars, 
+                    premium cloud kitchens, multiplex chains, and hospitality giants</strong>, delivering 
+                    exceptional value through our direct-from-manufacturer pricing model. Our 
+                    commitment extends beyond transactions—we forge lasting partnerships built 
+                    on reliability, quality, and operational excellence.
+                </p>
+                
+                <h2 class="font-serif text-2xl md:text-[2.2rem] text-primary mb-6 pb-3 relative about-content-h2">Vision & Mission</h2>
+                <p class="text-gray-600 text-base md:text-[1.1rem] leading-relaxed mb-8">
+                    At Obarly, we envision <strong class="text-primary font-semibold">transforming procurement paradigms in the foodservice 
+                    and hospitality sectors</strong>. Our mission is to curate an unparalleled ecosystem 
+                    where quality meets affordability, supported by white-glove service standards.
+                </p>
+                
+                <div class="my-8">
+                    <h2 class="font-serif text-2xl md:text-[2.2rem] text-primary mb-6 pb-3 relative about-content-h2">Why Partner With Us?</h2>
+                    <div class="flex items-start mb-4">
+                        <span class="text-secondary text-xl mr-4 mt-1">✓</span>
+                        <div>
+                            <strong class="text-primary font-semibold">Strategic Cost Advantage:</strong> Direct manufacturer relationships eliminate middlemen, delivering 15-30% cost savings
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <span class="text-secondary text-xl mr-4 mt-1">✓</span>
+                        <div>
+                            <strong class="text-primary font-semibold">Quality Assurance:</strong> Rigorous quality protocols ensure premium-grade products meeting international standards
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <span class="text-secondary text-xl mr-4 mt-1">✓</span>
+                        <div>
+                            <strong class="text-primary font-semibold">Custom Supply Solutions:</strong> Bespoke procurement programs tailored to your operational scale and requirements
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <span class="text-secondary text-xl mr-4 mt-1">✓</span>
+                        <div>
+                            <strong class="text-primary font-semibold">Concierge-Level Support:</strong> Dedicated account managers and 24/7 operational support
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="max-w-6xl mx-auto px-5 flex flex-wrap justify-between gap-10">
+            <!-- Column 1 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Company</h4>
+                <p class="text-white/80 text-sm mb-3">Zomato Hyperpure Private Limited</p>
+                <p class="text-white/80 text-sm mb-3">Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p class="text-white/80 text-sm mb-3">New Delhi - 110019</p>
+                <p class="text-white/80 text-sm mb-3">CIN: U74900DL2015PTC286208</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📞</span> 011-41171717</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📧</span> help@obarly.com</p>
+            </div>
+            
+            <!-- Column 2 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Know More</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Corporate Announcements</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Privacy</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Terms of Use</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Weather Union</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 3 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Follow us on</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">LinkedIn</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Instagram</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 4 -->
+            <div class="min-w-[250px] flex-1">
+                <img src="images/obar_bg.png" alt="OBARLY Logo" class="w-[150px] mb-5 filter brightness-0 invert">
+                <div class="flex gap-4 mt-5 flex-wrap">
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/google play.png" alt="Google Play" class="w-[140px] rounded-lg">
+                    </a>
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/app store.png" alt="App Store" class="w-[140px] rounded-lg">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-5 mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/60">
+            <p>License No. 10020064002537</p>
+            <p class="mt-2">Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Obarly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a5f3f',
+                        secondary: '#d4af37',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gray: '#6c757d',
+                        lightGray: '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-lightGray">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-white hover:text-secondary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </a>
+                <img src="/static/images/obar.png" alt="Obarly Logo" class="h-12">
+            </div>
+            <div class="flex items-center space-x-4">
+                {% if session.get('user_name') %}
+                    <a href="/cart" class="bg-secondary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">Cart</a>
+                    <span class="text-white">Welcome, {{ session.get('user_name') }}!</span>
+                    <a href="{{ url_for('logout') }}" class="bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">Logout</a>
+                {% else %}
+                    <a href="/cart" class="bg-secondary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">Cart</a>
+                    <a href="{{ url_for('login') }}" class="bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">Login</a>
+                    <a href="{{ url_for('signup') }}" class="bg-secondary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-serif text-primary mb-8">My Orders</h1>
+        {% if orders %}
+            <div class="grid gap-6">
+                {% for order in orders %}
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h2 class="text-xl font-semibold text-primary">Order #{{ order._id }}</h2>
+                                <p class="text-gray-600">Placed on {{ order.created_at.strftime('%B %d, %Y') }}</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-sm font-medium
+                                {% if order.status == 'Placed' %}bg-green-100 text-green-800
+                                {% elif order.status == 'Cancelled' %}bg-red-100 text-red-800
+                                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                {{ order.status }}
+                            </span>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h3 class="font-semibold mb-2">Products</h3>
+                            <div class="space-y-4">
+                                {% for product in order.products %}
+                                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                                        <div class="flex items-center space-x-4">
+                                            <img src="{{ product.image }}" alt="{{ product.name }}" class="w-16 h-16 object-cover rounded-lg">
+                                            <div>
+                                                <span class="font-medium">{{ product.name }}</span>
+                                                <p class="text-sm text-gray-600">Qty: {{ product.quantity }}</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-medium">₹{{ product.price * product.quantity }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="border-t pt-4 mt-4">
+                            <div class="flex justify-between mb-2">
+                                <span>Subtotal</span>
+                                <span>₹{{ order.total_price }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span>Tax (18%)</span>
+                                <span>₹{{ order.tax }}</span>
+                            </div>
+                            <div class="flex justify-between font-semibold text-lg">
+                                <span>Total</span>
+                                <span>₹{{ order.grand_total }}</span>
+                            </div>
+                        </div>
+
+                        {% if order.status == 'Placed' %}
+                            <div class="mt-4 flex justify-end">
+                                <button onclick="showCancelModal('{{ order._id }}')" 
+                                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                                    Cancel Order
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-12">
+                <p class="text-gray-600 text-lg">You haven't placed any orders yet.</p>
+                <a href="/" class="mt-4 inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                    Start Shopping
+                </a>
+            </div>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="max-w-6xl mx-auto px-5 flex flex-wrap justify-between gap-10">
+            <!-- Column 1 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Company</h4>
+                <p class="text-white/80 text-sm mb-3">Zomato Hyperpure Private Limited</p>
+                <p class="text-white/80 text-sm mb-3">Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p class="text-white/80 text-sm mb-3">New Delhi - 110019</p>
+                <p class="text-white/80 text-sm mb-3">CIN: U74900DL2015PTC286208</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📞</span> 011-41171717</p>
+                <p class="text-white/80 text-sm mb-3 flex items-start"><span class="text-secondary mr-2">📧</span> help@obarly.com</p>
+            </div>
+            
+            <!-- Column 2 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Know More</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Corporate Announcements</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Privacy</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Terms of Use</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Weather Union</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 3 -->
+            <div class="min-w-[250px] flex-1">
+                <h4 class="text-lg font-semibold mb-6 pb-2 relative footer-column-h4">Follow us on</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">LinkedIn</a></li>
+                    <li><a href="#" class="text-white/80 text-sm hover:text-white hover:pl-1 transition-all duration-300">Instagram</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 4 -->
+            <div class="min-w-[250px] flex-1">
+                <img src="images/obar_bg.png" alt="OBARLY Logo" class="w-[150px] mb-5 filter brightness-0 invert">
+                <div class="flex gap-4 mt-5 flex-wrap">
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/google play.png" alt="Google Play" class="w-[140px] rounded-lg">
+                    </a>
+                    <a href="#" class="hover:translate-y-[-3px] transition-transform duration-300">
+                        <img src="images/app store.png" alt="App Store" class="w-[140px] rounded-lg">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-5 mt-16 pt-8 border-t border-white/10 text-center text-sm text-white/60">
+            <p>License No. 10020064002537</p>
+            <p class="mt-2">Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Cancel Order Modal -->
+    <div id="cancelModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+            <svg class="mx-auto mb-4 text-yellow-500" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <h2 class="text-2xl font-bold mb-2 text-primary">Cancel Order</h2>
+            <p class="mb-6 text-gray-700">Are you sure you want to cancel this order?</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="hideCancelModal()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-400 transition-colors">
+                    No, Keep Order
+                </button>
+                <button onclick="cancelOrder()" class="bg-red-500 text-white px-6 py-2 rounded-lg font-bold hover:bg-red-600 transition-colors">
+                    Yes, Cancel Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentOrderId = null;
+
+        function showCancelModal(orderId) {
+            currentOrderId = orderId;
+            document.getElementById('cancelModal').classList.remove('hidden');
+        }
+
+        function hideCancelModal() {
+            document.getElementById('cancelModal').classList.add('hidden');
+            currentOrderId = null;
+        }
+
+        function cancelOrder() {
+            if (!currentOrderId) return;
+
+            fetch(`/cancel-order/${currentOrderId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    location.reload();
+                } else {
+                    alert(data.message || 'Failed to cancel order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to cancel order. Please try again.');
+            })
+            .finally(() => {
+                hideCancelModal();
+            });
+        }
+    </script>
+</body>
+</html> 

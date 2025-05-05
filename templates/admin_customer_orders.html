@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Orders - Obarly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a5f3f',
+                        secondary: '#d4af37',
+                        light: '#f8f9fa',
+                        dark: '#212529',
+                        gray: '#6c757d',
+                        lightGray: '#e9ecef',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="bg-white w-64 shadow-lg flex-shrink-0">
+            <div class="p-4 border-b border-gray-200">
+                <img src="logo/obar_bg.png" alt="Obarly Logo" class="h-10">
+            </div>
+            <div class="p-4">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-primary">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="font-semibold">{{ session.user_name }}</h4>
+                        <p class="text-xs text-gray-500">Super Admin</p>
+                    </div>
+                </div>
+                
+                <nav class="mt-8">
+                    <h5 class="text-xs uppercase text-gray-500 font-semibold mb-4">Main</h5>
+                    <a href="{{ url_for('admin') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{{ url_for('admin_orders') }}" class="flex items-center py-3 px-4 rounded-lg active-nav mb-2">
+                        <i class="fas fa-truck mr-3"></i>
+                        <span>All Orders</span>
+                    </a>
+                    <a href="{{ url_for('admin_users') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Users</span>
+                    </a>
+                    
+                    <h5 class="text-xs uppercase text-gray-500 font-semibold mt-8 mb-4">Settings</h5>
+                    <a href="{{ url_for('index') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50 mb-2">
+                        <i class="fas fa-home mr-3"></i>
+                        <span>Back to Home</span>
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="flex items-center py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-50">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        <span>Logout</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center">
+                        <button class="mr-4 text-gray-500">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <img src="{{ url_for('static', filename='logo/obar_bg.png') }}" alt="Obarly Logo" class="h-10 mr-4">
+                        <h1 class="font-serif text-xl text-primary">Customer Orders</h1>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Customer Info -->
+            <div class="p-6">
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-serif text-primary">{{ customer.name }}</h2>
+                            <p class="text-gray-600">{{ customer.email }}</p>
+                            {% if customer.created_at %}
+                            <p class="text-gray-500 text-sm mt-2">Member since {{ customer.created_at.strftime('%B %Y') }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-600">Total Orders</p>
+                            <h3 class="text-2xl font-bold text-primary">{{ orders|length }}</h3>
+                            <a href="{{ url_for('admin_orders') }}" class="text-sm text-primary hover:underline mt-2 inline-block">
+                                <i class="fas fa-arrow-left mr-1"></i> Back to All Orders
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="font-serif text-lg text-primary">Order History</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                {% for order in orders %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">#{{ order._id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full {% if order.status == 'Delivered' %}bg-green-100 text-green-800{% elif order.status == 'Shipped' %}bg-blue-100 text-blue-800{% elif order.status == 'Processing' %}bg-yellow-100 text-yellow-800{% elif order.status == 'Cancelled' %}bg-red-100 text-red-800{% else %}bg-purple-100 text-purple-800{% endif %}">
+                                            {{ order.status }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ order.grand_total }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button onclick="viewOrderDetails('{{ order._id }}')" class="text-primary hover:text-primary-dark mr-3">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        {% if order.status == 'Placed' %}
+                                        <button onclick="updateOrderStatus('{{ order._id }}', 'Processing')" class="text-yellow-600 hover:text-yellow-800 mr-3">
+                                            <i class="fas fa-clock"></i>
+                                        </button>
+                                        {% elif order.status == 'Processing' %}
+                                        <button onclick="updateOrderStatus('{{ order._id }}', 'Shipped')" class="text-blue-600 hover:text-blue-800 mr-3">
+                                            <i class="fas fa-truck"></i>
+                                        </button>
+                                        {% elif order.status == 'Shipped' %}
+                                        <button onclick="updateOrderStatus('{{ order._id }}', 'Delivered')" class="text-green-600 hover:text-green-800 mr-3">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function viewOrderDetails(orderId) {
+        // Implement order details view
+        console.log('View order details:', orderId);
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+        fetch(`/admin/update-order-status/${orderId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating order status');
+        });
+    }
+    </script>
+</body>
+</html> 

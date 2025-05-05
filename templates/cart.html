@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBARLY</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-2xl font-bold text-gray-900 hover:text-green-500 transition">OBARLY</a>
+                </div>
+
+                <!-- Search Bar - Hidden on mobile -->
+                <div class="hidden md:flex items-center mx-4 flex-1 max-w-2xl">
+                    <div class="relative w-full">
+                        <input type="text" class="w-full px-4 py-2 text-base border-2 rounded-full outline-none focus:border-green-400 transition" placeholder="Search for products...">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <i class="fas fa-search text-gray-400 hover:text-green-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/cart" class="p-2 hover:scale-110 transition relative">
+                        <i class="fas fa-shopping-cart text-gray-700 hover:text-green-500"></i>
+                        <span class="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{{ products|length }}</span>
+                    </a>
+                    <a href="/wishlist" class="p-2 hover:scale-110 transition">
+                        <i class="fas fa-heart text-gray-700 hover:text-green-500"></i>
+                    </a>
+                    {% if session.get('user_id') %}
+                    <div class="relative group">
+                        <button class="p-2 hover:scale-110 transition">
+                            <i class="fas fa-user text-gray-700 hover:text-green-500"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
+                            <a href="/my-orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="/login" class="p-2 hover:scale-110 transition">
+                        <i class="fas fa-user text-gray-700 hover:text-green-500"></i>
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <div class="relative mb-4">
+                    <input type="text" class="w-full px-4 py-2 text-base border-2 rounded-full outline-none focus:border-green-400" placeholder="Search...">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </button>
+                </div>
+                <a href="/cart" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-500">
+                    <i class="fas fa-shopping-cart mr-2"></i>Cart
+                </a>
+                <a href="/wishlist" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-500">
+                    <i class="fas fa-heart mr-2"></i>Wishlist
+                </a>
+                {% if session.get('user_id') %}
+                <a href="/my-orders" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-500">
+                    <i class="fas fa-box mr-2"></i>My Orders
+                </a>
+                <a href="/logout" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-500">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+                {% else %}
+                <a href="/login" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-500">
+                    <i class="fas fa-user mr-2"></i>Login
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            
+            if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
+    <main class="w-full max-w-screen-xl flex flex-row items-start px-6 mt-24 gap-6">
+        <div class="w-3/4 bg-white p-6 rounded-lg shadow-md">
+            <h1 class="text-3xl font-semibold text-gray-900">Cart</h1>
+            <div class="flex justify-between items-center mt-4">
+                <button class="p-2 text-white rounded-full hover:bg-green-500 transition" style="background-color: rgb(76,147,96)" onclick="window.location.href='/product'">Continue Shopping</button>
+                <button class="p-2 text-white rounded-full hover:bg-red-500 transition" style="background-color: rgb(76,147,96)" onclick="window.location.href='/clear-cart'">Clear Cart</button>
+            </div>
+            
+            <!-- Cart Items -->
+            <div id="cart-items" class="space-y-4">
+                {% for product in products %}
+                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow">
+                    <div class="flex items-center gap-4">
+                        <a href="{{ url_for('product_view', product_id=product['_id']) }}" class="flex-shrink-0">
+                            <img src="{{ product['image'] }}" alt="{{ product['name'] }}" class="w-16 h-16 object-cover rounded">
+                        </a>
+                        <div>
+                            <a href="{{ url_for('product_view', product_id=product['_id']) }}" class="text-lg font-semibold text-gray-800 hover:text-green-500 transition">
+                                {{ product['name'] }}
+                            </a>
+                            <p class="text-gray-600">₹{{ product['price'] }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Input -->
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center border rounded-md quantity-selector" data-product-id="{{ product['_id'] }}">
+                            <button class="quantity-btn minus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity-input w-16 text-center border-x px-2 py-2" 
+                                   value="{{ product['quantity'] }}" min="0" 
+                                   data-product-id="{{ product['_id'] }}">
+                            <button class="quantity-btn plus px-3 py-2 hover:bg-gray-100" data-product-id="{{ product['_id'] }}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div>
+                        <p class="font-semibold text-lg text-gray-900">₹{{ product['price'] }}</p>
+                    </div>
+
+                    <!-- Remove Button -->
+                    <div>
+                        <a href="{{ url_for('remove_from_cart', product_id=product['_id']) }}">
+                            <button class="p-2 text-white rounded-full hover:bg-red-500 transition" style="background-color: rgb(76,147,96)">Remove</button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Cart Summary -->
+        <div class="w-1/4 p-6 rounded-lg shadow-md h-fit" style="background-color: rgb(76,147,96,0.1)">
+            <h2 class="text-2xl font-semibold text-gray-900">Cart Summary</h2>
+            <div class="mt-4 flex justify-between">
+                <span class="text-lg">Subtotal:</span>
+                <span class="text-lg font-semibold" id="subtotal">₹{{ total_price }}</span>
+            </div>
+            <div class="mt-4 flex justify-between">
+                <span class="text-lg">Tax (18%):</span>
+                <span class="text-lg font-semibold" id="tax">₹{{ tax }}</span>
+            </div>
+            <div class="mt-4 flex justify-between text-xl font-semibold border-t pt-4">
+                <span>Total:</span>
+                <span id="total">₹{{ total_price + tax }}</span>
+            </div>
+            <a href="{{ url_for('checkout') }}" id="checkoutButton" class="mt-6 block w-full text-center px-6 py-3 text-white rounded-full transition transform hover:scale-105" style="background-color: rgb(76,147,96)">
+                Proceed to Checkout
+            </a>
+            
+            <!-- Empty Cart Notification -->
+            <div id="emptyCartNotification" class="mt-4 text-center text-red-600 font-medium opacity-0 transition-opacity duration-300">
+                <p>Please select items to proceed</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full bg-gray-900 text-white py-12 mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3">Company</h4>
+                <p>Zomato Hyperpure Private Limited</p>
+                <p>Ground Floor, 12A, 94 Meghdoot, Nehru Place,</p>
+                <p>New Delhi - 110019</p>
+                <p>CIN: U74900DL2015PTC286208</p>
+                <p class="flex items-center"><span class="mr-2">📞</span> 011-41171717</p>
+                <p class="flex items-center"><span class="mr-2">📧</span> help@obarly.com</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Know More</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Corporate Announcements</a></li>
+                    <li><a href="#" class="hover:underline">Privacy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="hover:underline">Supplier Code of Conduct</a></li>
+                    <li><a href="#" class="hover:underline">Weather Union</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3">Follow us on</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">LinkedIn</a></li>
+                    <li><a href="#" class="hover:underline">Instagram</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="/static/images/obar.png" alt="OBARLY Logo" class="w-36 mb-3">
+                <div class="flex space-x-4">
+                    <a href="#"><img src="/static/images/google play.png" alt="Google Play" class="w-28"></a>
+                    <a href="#"><img src="/static/images/app store.png" alt="App Store" class="w-28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 mt-8 pt-4 text-center text-sm text-gray-500">
+            <p>License No. 10020064002537</p>
+            <p>Copyright © OBARLY All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        function updateCartTotal() {
+            let subtotal = 0;
+            const cartItems = document.querySelectorAll('#cart-items > div');
+            
+            cartItems.forEach(item => {
+                const quantity = parseInt(item.querySelector('.quantity-input').value);
+                const price = parseFloat(item.querySelector('div:nth-child(3) p').textContent.replace('₹', ''));
+                subtotal += quantity * price;
+            });
+
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = '₹' + subtotal.toFixed(2);
+            document.getElementById('tax').textContent = '₹' + tax.toFixed(2);
+            document.getElementById('total').textContent = '₹' + total.toFixed(2);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            const plusButtons = document.querySelectorAll('.quantity-btn.plus');
+            const minusButtons = document.querySelectorAll('.quantity-btn.minus');
+
+            // Handle quantity changes
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', async function() {
+                    if (this.value < 0) this.value = 0;
+                    const productId = this.dataset.productId;
+                    const quantity = parseInt(this.value);
+                    if (quantity === 0) {
+                        // Remove from cart if quantity is 0
+                        window.location.href = `/remove-from-cart/${productId}`;
+                        return;
+                    }
+                    try {
+                        const response = await fetch(`/update-cart-quantity/${productId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `quantity=${quantity}`
+                        });
+                        const data = await response.json();
+                        if (data.status === 'success') {
+                            updateCartTotal();
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+
+                // Add input event for real-time updates
+                input.addEventListener('input', function() {
+                    if (this.value < 0) this.value = 0;
+                    updateCartTotal();
+                });
+            });
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) + 1;
+                    input.value = newQuantity;
+                    try {
+                        const response = await fetch(`/update-cart-quantity/${productId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `quantity=${newQuantity}`
+                        });
+                        const data = await response.json();
+                        if (data.status === 'success') {
+                            updateCartTotal();
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const productId = this.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    const newQuantity = parseInt(input.value) - 1;
+                    if (newQuantity >= 0) {
+                        input.value = newQuantity;
+                        if (newQuantity === 0) {
+                            // Remove from cart if quantity is 0
+                            window.location.href = `/remove-from-cart/${productId}`;
+                            return;
+                        }
+                        try {
+                            const response = await fetch(`/update-cart-quantity/${productId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: `quantity=${newQuantity}`
+                            });
+                            const data = await response.json();
+                            if (data.status === 'success') {
+                                updateCartTotal();
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    }
+                });
+            });
+
+            // Initial calculation
+            updateCartTotal();
+
+            // Handle checkout button click
+            document.getElementById('checkoutButton').addEventListener('click', function(e) {
+                const total = parseFloat(document.getElementById('total').textContent.replace('₹', ''));
+                if (total === 0) {
+                    e.preventDefault();
+                    showEmptyCartNotification();
+                }
+            });
+        });
+
+        // Show empty cart notification
+        function showEmptyCartNotification() {
+            const notification = document.getElementById('emptyCartNotification');
+            notification.classList.remove('opacity-0');
+            setTimeout(() => {
+                notification.classList.add('opacity-0');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
