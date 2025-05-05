@@ -1,0 +1,804 @@
+[
+  {
+    "_id": "6813c76739201c2856b031c0",
+    "customer": {
+      "email": "pabitragiri2005@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f21a",
+        "product_name": "550 Ml Salsa Glass Bottle Pack Of 30 Pcs With Black Lid",
+        "product_sku": "KK636",
+        "default_price": 573,
+        "categories": "Glassware",
+        "Sub_category": "Glass Bottle",
+        "description": "Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826346100.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826346098.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735816113834.jpg",
+        "price": 573,
+        "name": "550 Ml Salsa Glass Bottle Pack Of 30 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826346100.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 2073,
+    "tax": 373.14,
+    "grand_total": 2446.14,
+    "status": "Processing",
+    "created_at": "2025-05-01 19:11:35.040000"
+  },
+  {
+    "_id": "6813c81e279c8e632ff37c60",
+    "customer": {
+      "email": "pabitragiri2005@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 2430,
+    "tax": 437.4,
+    "grand_total": 2867.4,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:14:38.156000"
+  },
+  {
+    "_id": "6813ca50720cf5ab35a17a04",
+    "customer": {
+      "email": "None",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1500,
+    "tax": 270.0,
+    "grand_total": 1770.0,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:24:00.991000"
+  },
+  {
+    "_id": "6813cab8720cf5ab35a17a05",
+    "customer": {
+      "email": "None",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1500,
+    "tax": 270.0,
+    "grand_total": 1770.0,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:25:44.237000"
+  },
+  {
+    "_id": "6813cb7d972efdd38aa6ac07",
+    "customer": {
+      "email": "None",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1500,
+    "tax": 270.0,
+    "grand_total": 1770.0,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:29:01.391000"
+  },
+  {
+    "_id": "6813cbdc996eb830234f89f0",
+    "customer": {
+      "email": "pabitragiri2005@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:30:36.532000"
+  },
+  {
+    "_id": "6813cd079e4ee2efd3d2108a",
+    "customer": {
+      "email": null,
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Placed",
+    "created_at": "2025-05-01 19:35:35.424000"
+  },
+  {
+    "_id": "6813ce1d06143d82781dcb82",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Cancelled",
+    "created_at": "2025-05-01 19:40:13.698000"
+  },
+  {
+    "_id": "6813ce4506143d82781dcb83",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "address": "A-14/6, Shankar Hill Town, Toranagallu",
+      "apartment": "",
+      "city": "Bellary",
+      "state": "Karnataka",
+      "pincode": "583123"
+    },
+    "payment_method": "Cash on Delivery",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f21d",
+        "product_name": "Urinal Screen Freshness Mat 6.5\" Pack Of 10Pcs",
+        "product_sku": "KK632",
+        "default_price": 215,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipes & Scrubbers,Wipers & Brooms,",
+        "description": "5 individually wrapped In a 2 Pcs Urinal Screen are specifically designed for placement in urinals, delivering a fresh scent for up to 30 days .Best for restaurants, offices, health care facilities and industrial locations , eliminate odor to deliver a fresh-smelling environment.\n Scented Urinal Screens are expertly crafted using sturdy yet flexible plastic. They feature a lattice design encircled with bristles throughout to help eliminate 99% of splashback for patrons.Reducing the spread of germs throughout a facility.\n  Urinal Splash Screens assist maintenance personnel in keeping cigarette butts and any other refuse from clogging the urinal. Cut cleaning time in half! complete their jobs more quickly and efficiently, saving you money on plumbing costs to boot.\n  6.5\" in diameter with 0.4 inch spikes extending out urinal screen fits any stalls. Simply place it over the drain in the urinal and you’re done. This easy installation takes mere seconds, eliminating errors which can result in a mess around the urinal.\n  Perfect fit for Public restrooms,Restaurant restrooms,Office restrooms,School restrooms,Factory restrooms,Shopping mall restrooms,Church restrooms etc.. Remove bad smells &amp; uric salt build up and whoever uses your company or business washrooms will immediately notice the difference in just one use.      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1731744827448.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1731744827447.jpg",
+        "price": 215,
+        "name": "Urinal Screen Freshness Mat 6.5\" Pack Of 10Pcs",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1731744827448.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f221",
+        "product_name": "Godrej Aer Spray Monsoon Odour Refresh Mrp 169",
+        "product_sku": "KK628",
+        "default_price": 122,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Cleaning Chemicals",
+        "description": " Here’s Godrej Aer Room Freshener Spray and here’s what we would like you to know about it. You’d agree it doesn’t look like any ordinary room freshener and once you get a whiff of the fragrance, you’ll agree it doesn’t smell ordinary either. A must-have air freshener for your home &amp; office, it is easy to use and long-lasting. Let Godrej aer tell your home’s unique story by setting the perfect ambiance that your family and friends will remember you for.\n \n  A must-have air freshener for your home &amp; office, Godrej Aer spray is easy to use and long-lasting. Keywords - Room Freshner, Freshener.  SIZE 220 ML  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.\n       ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1725516441539.jpg",
+        "price": 122,
+        "name": "Godrej Aer Spray Monsoon Odour Refresh Mrp 169",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1725516441539.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1037,
+    "tax": 186.66,
+    "grand_total": 1223.66,
+    "status": "Processing",
+    "created_at": "2025-05-01 19:40:53.212000"
+  },
+  {
+    "_id": "6813cee806143d82781dcb84",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "street": "A-14/6, Shankar Hill Town, Toranagallu",
+      "city": "Bellary",
+      "state": "KARNATAKA",
+      "zip_code": "583123"
+    },
+    "payment_method": "",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 800,
+    "tax": 144.0,
+    "grand_total": 944.0,
+    "status": "Processing",
+    "created_at": "2025-05-01 19:43:36.896000"
+  },
+  {
+    "_id": "6813cf6a06143d82781dcb85",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "",
+      "last_name": "",
+      "phone": ""
+    },
+    "address": {
+      "street": "",
+      "city": "",
+      "state": "",
+      "zip_code": ""
+    },
+    "payment_method": "",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f219",
+        "product_name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "product_sku": "KK637",
+        "default_price": 700,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": "    Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing condiments, spices, nuts, snacks, and more.\n Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.     Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n  ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966569.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735815278284.jpg",
+        "price": 700,
+        "name": "780 Ml Glass Jar Pack Of 24 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813966571.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1500,
+    "tax": 270.0,
+    "grand_total": 1770.0,
+    "status": "Cancelled",
+    "created_at": "2025-05-01 19:45:46.921000"
+  },
+  {
+    "_id": "6813cfe8eec9d9885231fce4",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "",
+      "last_name": "",
+      "phone": ""
+    },
+    "address": {
+      "street": "",
+      "city": "",
+      "state": "",
+      "zip_code": ""
+    },
+    "payment_method": "",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 2
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 2
+      }
+    ],
+    "total_price": 3460,
+    "tax": 622.8,
+    "grand_total": 4082.8,
+    "status": "Cancelled",
+    "created_at": "2025-05-01 19:47:52.210000"
+  },
+  {
+    "_id": "6813d144eec9d9885231fce5",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "street": "A-14/6, Shankar Hill Town, Toranagallu",
+      "city": "Bellary",
+      "state": "KARNATAKA",
+      "zip_code": "583123"
+    },
+    "payment_method": "cod",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Delivered",
+    "created_at": "2025-05-01 19:53:40.375000"
+  },
+  {
+    "_id": "6813d8adb0137e8a57f0fe12",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "street": "A-14/6, Shankar Hill Town, Toranagallu",
+      "city": "Bellary",
+      "state": "KARNATAKA",
+      "zip_code": "583123"
+    },
+    "payment_method": "cod",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Delivered",
+    "created_at": "2025-05-01 20:25:17.045000"
+  },
+  {
+    "_id": "6818f795cc14c5612f0424a0",
+    "customer": {
+      "email": "pabitragirithebest@gmail.com",
+      "first_name": "Pabitra",
+      "last_name": "Giri",
+      "phone": "07892315892"
+    },
+    "address": {
+      "street": "A-14/6, Shankar Hill Town, Toranagallu",
+      "city": "Bellary",
+      "state": "KARNATAKA",
+      "zip_code": "583123"
+    },
+    "payment_method": "cod",
+    "products": [
+      {
+        "_id": "680414938c8a049b40f0f217",
+        "product_name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "product_sku": "KK639",
+        "default_price": 930,
+        "categories": "Glassware",
+        "Sub_category": "Glass Jar",
+        "description": " Glass jars and glass bottles make for the most stable form of all packaging materials. The glass jars can be used for multiple food items like dips &amp; desserts or can be used for storing jams, condiments, spices, nuts, snacks, and more.\n  Glass bottles can be used for deliveries or self-consumption with all types of liquid.\n  The kitchen storage containers and bottles come with Lug caps made from recyclable aluminum/tin plates. The Lug caps are available in gold or black that are designed to vacuum seal the jar or bottle.\n  Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.  \n ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548871.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735814864740.jpg",
+        "price": 930,
+        "name": "350Ml Salsa Glass Jar Pack Of 72 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735813548872.jpg",
+        "quantity": 1
+      },
+      {
+        "_id": "680414938c8a049b40f0f218",
+        "product_name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "product_sku": "KK638",
+        "default_price": 800,
+        "categories": "Cleaning & Housekeeping Items",
+        "Sub_category": "Wipers & Garbage Bag,Glassware",
+        "description": "Jar Capacity Is 400 ML, In Grams it will differ as it depends on volume-metric weight of the thing you want to store. Must See Size Of This Jar Before You Decide To Buy.\n Suitable To Use Multipurpose Storage With Airtight Cap ,This Jar Can Also Use In Microwave Oven.\n  Food Grade Jar And Cap Both , Very Usefull To Replace Your Plastic Massala Jars ,\n  Rust Proof Cap ,You Can Use It In Your Kitchen Or Home Without Any Hesitation.\n  Special Coating Given In The Cap Inside To Avoide Any Type Of Problem In The Item You Store In .      Disclaimer\n  Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented. ",
+        "image_path": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg#https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156675.jpg",
+        "price": 800,
+        "name": "400 Ml Glass Jar Pack Of 60 Pcs With Black Lid",
+        "image": "https://d2wuvg8krwnvon.cloudfront.net/media/user_space/0af7eaf0fb0b/hyperstore/product/hyperstore_1735826156678.jpg",
+        "quantity": 1
+      }
+    ],
+    "total_price": 1730,
+    "tax": 311.4,
+    "grand_total": 2041.4,
+    "status": "Placed",
+    "created_at": "2025-05-05 17:38:29.181000"
+  }
+]
