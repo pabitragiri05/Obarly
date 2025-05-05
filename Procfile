@@ -1,1 +1,1 @@
-web: sh -c 'pip install -r requirements.txt && gunicorn wsgi:app --bind 0.0.0.0:$PORT' 
+web: python -m pip install -r requirements.txt && python -m gunicorn wsgi:app --bind 0.0.0.0:$PORT 
