@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "6811e05b9d11f31fdb9e27e1",
+    "email": "pabitragiri2005@gmail.com",
+    "password": "scrypt:32768:8:1$aB9oh7CBPkvNa3QN$68845853443f45e4097a2fd722138a52a00a537b1cfd58e84346b0bcca101d19efa9b7a300a8d965061e0edaca307642dd48095162d9db3ff26f2ddbc13aa790",
+    "created_at": "2025-04-30 08:33:31.899000"
+  },
+  {
+    "_id": "681318bc6852c1f60d3e0cab",
+    "name": "Pabitra Giri",
+    "email": "earnmoneyonline504@gmail.com",
+    "password": "scrypt:32768:8:1$GN7bNVmAvMufWwGC$f22891b5401e27272e6db4194392ed3211cacdce5f6b14e772d7a8312dd9769ecb5397c96d1a24e2f714d63a5d7d9e766320be0ee15f19e5035bf11dd50e06b3",
+    "role": "user",
+    "created_at": "2025-05-01 06:46:20.046000"
+  },
+  {
+    "_id": "6813c5b5fb237153cff8450f",
+    "name": "Pabitra Giri",
+    "email": "pabitragirithebest@gmail.com",
+    "password": "scrypt:32768:8:1$OIUdfElerKdUTpqg$4c8e31443315be4818e644b59d1879b350b240c7e5a80dd3e1b877044ecc0207094edf5851414eabf98c2fd3e3a55b66d60dc34950dcfb3d2298837375b460a5",
+    "role": "user",
+    "created_at": "2025-05-01 19:04:21.449000"
+  },
+  {
+    "_id": "6813e136095aae3ab8484fc7",
+    "name": "Pabitra Giri",
+    "email": "nkgiri1977@gmail.com",
+    "password": "scrypt:32768:8:1$WyhvIT7sTcl02VEm$2f7288d9d61f9ddbedebf30c784eb8239993edeee9273ad93359a6fc0286d519387f7d5205b089fbf69a057eb0ea935cb195f540e4dd2a67c3b232e62ebb9e45",
+    "role": "admin",
+    "created_at": "2025-05-02 02:31:42.786000"
+  }
+]
